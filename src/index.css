@@ -4,10 +4,21 @@
 
 @layer base {
     #root {
+        font-family: "Roboto", sans-serif;
+    }
+
+    .root-container {
         width: 100dvw;
         height: 100dvh;
-        padding: 1rem;
+        display: grid;
+        grid-template-rows: 8rem 1fr;
+    }
 
-        font-family: "Roboto", sans-serif;
+    .root-container-mobile {
+        padding: 1rem;
+    }
+
+    .root-container-desktop {
+        padding-left: 4rem;
     }
 }
