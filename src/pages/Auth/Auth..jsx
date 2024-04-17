@@ -2,10 +2,13 @@ import {cn} from "../../global/utils.js";
 import {Button, Input} from "@nextui-org/react";
 import {useState} from "react";
 import {LoginClient, RegisterClient} from "../../services/services.js";
+import {setAccessToken, setUserID, setUserLogin} from "../../services/utils.js";
+import {useNavigate} from "react-router-dom";
 
 function Auth() {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const onLogin = () => {
         if (!login || !password) {
@@ -15,10 +18,14 @@ function Auth() {
 
         LoginClient(login, password).then(
             (respData) => {
-                if (!respData["ok"]) {
+                if (!respData.ok) {
                     alert("Такого пользователя не существует");
+                } else {
+                    setAccessToken(respData.data.access_token);
+                    setUserID(respData.data.id);
+                    setUserLogin(respData.data.login);
+                    navigate("/home", {replace: true});
                 }
-                console.log(respData.err)
             }
         );
     }
@@ -30,7 +37,16 @@ function Auth() {
         }
 
         RegisterClient(login, password).then(
-            respData => console.log(respData)
+            (respData) => {
+                if (!respData.ok) {
+                    alert(respData.err);
+                } else {
+                    setAccessToken(respData.data.access_token);
+                    setUserID(respData.data.id);
+                    setUserLogin(respData.data.login);
+                    navigate("/home", {replace: true});
+                }
+            }
         );
     }
 

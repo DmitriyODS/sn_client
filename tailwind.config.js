@@ -21,6 +21,7 @@ export default {
                         foreground: "#FFFFFF",
                         DEFAULT: "#1726A6",
                     },
+                    content1: "#ffffff"
                 },
             }
         }

@@ -6,6 +6,5 @@ export function AddIcon(props) {
              className={cn('w-6 aspect-square', props.className)}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
         </svg>
-
     );
 }
