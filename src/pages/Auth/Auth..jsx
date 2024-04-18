@@ -4,6 +4,8 @@ import {useState} from "react";
 import {LoginClient, RegisterClient} from "../../services/services.js";
 import {setAccessToken, setUserID, setUserLogin} from "../../services/utils.js";
 import {useNavigate} from "react-router-dom";
+import {AuthModal} from "../../components/AuthModal/AuthModal.jsx";
+import {MyInput} from "../../components/MyInput/MyInput.jsx";
 
 function Auth() {
     const [login, setLogin] = useState('');
@@ -51,51 +53,20 @@ function Auth() {
     }
 
     return (
-        <main className={cn([
-            'fixed top-0 left-0 w-full h-full bg-black/50 flex'
-        ])}>
-            <div className={cn([
-                'w-full h-min bg-black my-auto',
-                'bg-background px-[10%] md:px-[20%] xl:px-[30%] py-8 flex flex-col justify-center'
-            ])}>
+        <main className={'fixed top-0 left-0 w-full h-full bg-black/50 flex'}>
+            <AuthModal>
                 <h1 className={'text-[2.5rem] font-light'}>Регистрация и вход</h1>
                 <form className={'flex flex-col gap-8 mt-4'}>
-                    <Input
+                    <MyInput
                         value={login}
-                        onChange={(e) => setLogin(e.target.value)}
-                        radius={'none'}
-                        classNames={{
-                            label: "text-black/50",
-                            input: [
-                                "text-black/90",
-                                "placeholder:text-default-700/50",
-                                "text-2xl",
-                            ],
-                            inputWrapper: [
-                                "!cursor-text",
-                                "h-[3.5rem]"
-                            ],
-                        }}
-                        placeholder="логин"
+                        setValue={setLogin}
+                        label={'логин'}
                     />
-                    <Input
+                    <MyInput
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        setValue={setPassword}
+                        label={'пароль'}
                         type={'password'}
-                        radius={'none'}
-                        classNames={{
-                            label: "text-black/50",
-                            input: [
-                                "text-black/90",
-                                "placeholder:text-default-700/50",
-                                "text-2xl",
-                            ],
-                            inputWrapper: [
-                                "!cursor-text",
-                                "h-[3.5rem]"
-                            ],
-                        }}
-                        placeholder="пароль"
                     />
                     <div className={'flex w-full gap-4 justify-end'}>
                         <Button
@@ -114,7 +85,7 @@ function Auth() {
                         </Button>
                     </div>
                 </form>
-            </div>
+            </AuthModal>
         </main>
     );
 }
