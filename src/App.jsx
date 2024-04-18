@@ -3,6 +3,7 @@ import {TopBar} from "./components/TopBar/TopBar.jsx";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import {isAuth} from "./services/utils.js";
+import {ModalProvider} from "./components/MyModal/ModelProvider.jsx";
 
 function App() {
     const curLocation = useLocation();
@@ -20,10 +21,12 @@ function App() {
 
     return (
         <NextUIProvider>
-            <div className={'root-container root-container-mobile lg:root-container-desktop'}>
-                <TopBar/>
-                <Outlet/>
-            </div>
+            <ModalProvider>
+                <div className={'root-container root-container-mobile lg:root-container-desktop'}>
+                    <TopBar/>
+                    <Outlet/>
+                </div>
+            </ModalProvider>
         </NextUIProvider>
     )
 }

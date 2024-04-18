@@ -91,3 +91,75 @@ export async function ToggleLike(user_id, post_id) {
         console.error('Ошибка:', error);
     }
 }
+
+export async function AddPost(title, text) {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", getAccessToken());
+
+    const raw = JSON.stringify({
+        "title": title,
+        "text": text,
+        "user_id": getUserID()
+    });
+
+    const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    try {
+        const resp = await fetch("http://127.0.0.1:8080/api/v1/posts", requestOptions);
+        return await resp.json();
+    } catch (error) {
+        console.error('Ошибка:', error);
+    }
+}
+
+export async function EditPost(id, title, text) {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", getAccessToken());
+
+    const raw = JSON.stringify({
+        "title": title,
+        "text": text,
+        "id": id
+    });
+
+    const requestOptions = {
+        method: 'PUT',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    try {
+        const resp = await fetch("http://127.0.0.1:8080/api/v1/posts", requestOptions);
+        return await resp.json();
+    } catch (error) {
+        console.error('Ошибка:', error);
+    }
+}
+
+export async function DeletePost(id) {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", getAccessToken());
+
+    const requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    try {
+        const resp = await fetch(`http://127.0.0.1:8080/api/v1/posts/${id.toString()}`, requestOptions);
+        return await resp.json();
+    } catch (error) {
+        console.error('Ошибка:', error);
+    }
+}
+

@@ -2,9 +2,12 @@ import {Button, Popover, PopoverContent, PopoverTrigger} from "@nextui-org/react
 import {AddIcon} from "../Icons/AddIcon.jsx";
 import {clearAuthData, getUserLogin, isAuth} from "../../services/utils.js";
 import {useNavigate} from "react-router-dom";
+import {useContext} from "react";
+import {ModalContext} from "../MyModal/ModelProvider.jsx";
 
 export function TopBar() {
     const navigate = useNavigate();
+    const {onOpen} = useContext(ModalContext);
 
     const onLogout = () => {
         clearAuthData();
@@ -21,6 +24,7 @@ export function TopBar() {
                 variant={'bordered'}
                 radius={'full'}
                 isIconOnly
+                onPress={onOpen}
             >
                 <AddIcon/>
             </Button>
