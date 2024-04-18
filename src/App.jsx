@@ -22,10 +22,7 @@ function App() {
     return (
         <NextUIProvider>
             <ModalProvider>
-                <div className={'root-container root-container-mobile lg:root-container-desktop'}>
-                    <TopBar/>
-                    <Outlet/>
-                </div>
+                <div>App</div>
             </ModalProvider>
         </NextUIProvider>
     )
