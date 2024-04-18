@@ -1,6 +1,11 @@
 import {getAccessToken, getUserID} from "./utils.js";
+import {Config} from "../global/config.js";
+
+const base_url = `http://${Config.SRV_URL}:${Config.SRV_PORT}/api/v1`
 
 export async function LoginClient(login, password) {
+    console.log(base_url);
+
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -17,7 +22,7 @@ export async function LoginClient(login, password) {
     };
 
     try {
-        const resp = await fetch("http://127.0.0.1:8080/api/v1/auth/login", requestOptions);
+        const resp = await fetch(`${base_url}/auth/login`, requestOptions);
         return await resp.json();
     } catch (error) {
         console.error('Ошибка:', error);
@@ -41,7 +46,7 @@ export async function RegisterClient(login, password) {
     };
 
     try {
-        const resp = await fetch("http://127.0.0.1:8080/api/v1/auth/reg", requestOptions);
+        const resp = await fetch(`${base_url}/auth/reg`, requestOptions);
         return await resp.json();
     } catch (error) {
         console.error('Ошибка:', error);
@@ -60,7 +65,7 @@ export async function GetPosts() {
     };
 
     try {
-        const resp = await fetch(`http://127.0.0.1:8080/api/v1/posts?user_id=${getUserID().toString()}`, requestOptions);
+        const resp = await fetch(`${base_url}/posts?user_id=${getUserID().toString()}`, requestOptions);
         return await resp.json();
     } catch (error) {
         console.error('Ошибка:', error);
@@ -85,7 +90,7 @@ export async function ToggleLike(user_id, post_id) {
     };
 
     try {
-        const resp = await fetch("http://127.0.0.1:8080/api/v1/likes", requestOptions);
+        const resp = await fetch(`${base_url}/likes`, requestOptions);
         return await resp.json();
     } catch (error) {
         console.error('Ошибка:', error);
@@ -111,7 +116,7 @@ export async function AddPost(title, text) {
     };
 
     try {
-        const resp = await fetch("http://127.0.0.1:8080/api/v1/posts", requestOptions);
+        const resp = await fetch(`${base_url}/posts`, requestOptions);
         return await resp.json();
     } catch (error) {
         console.error('Ошибка:', error);
@@ -137,7 +142,7 @@ export async function EditPost(id, title, text) {
     };
 
     try {
-        const resp = await fetch("http://127.0.0.1:8080/api/v1/posts", requestOptions);
+        const resp = await fetch(`${base_url}/posts`, requestOptions);
         return await resp.json();
     } catch (error) {
         console.error('Ошибка:', error);
@@ -156,7 +161,7 @@ export async function DeletePost(id) {
     };
 
     try {
-        const resp = await fetch(`http://127.0.0.1:8080/api/v1/posts/${id.toString()}`, requestOptions);
+        const resp = await fetch(`${base_url}/posts/${id.toString()}`, requestOptions);
         return await resp.json();
     } catch (error) {
         console.error('Ошибка:', error);
